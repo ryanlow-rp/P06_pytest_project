@@ -1,27 +1,25 @@
+import pytest
 from calculator.calculator import Calculator
 
 class TestCalculator:
-    def test_add(self):
-        # arrange
-        a = 4321
-        b = 1234
-        cal = Calculator()
+    @pytest.fixture
+    def calculator(self):
+        return Calculator()
 
-        # act
-        result = cal.add(a, b)
+    def test_add(self, calculator):
+        assert calculator.add(1, 2) == 3
+        # additional test cases...
 
-        # assert
-        expected = 5555
-        assert result == expected
+    def test_subtract(self, calculator):
+        assert calculator.subtract(10, 5) == 5
+        # additional test cases...
 
-    def test_subtract(self):
-        pass
-        # to be done
+    def test_multiply(self, calculator):
+        assert calculator.multiply(2, 3) == 6
+        # additional test cases...
 
-    def test_multiply(self):
-        pass
-        # to be done
-
-    def test_divide(self):
-        pass
-        # to be done
+    def test_divide(self, calculator):
+        assert calculator.divide(10, 5) == 2
+        # additional test cases...
+        with pytest.raises(ZeroDivisionError):
+            calculator.divide(10, 0)
